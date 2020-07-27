@@ -12,7 +12,7 @@ def build_tabs():
     return  dbc.Tabs(
             [
                 dbc.Tab(build_descriptive(), label="Descriptivo"),
-                #dbc.Tab(build_diagnostic(), label="Diagnóstico"),
+                dbc.Tab(build_diagnostic(), label="Diagnóstico"),
                 dbc.Tab(build_predictive(), label="Predictive"),
             ],
             id="tabs",

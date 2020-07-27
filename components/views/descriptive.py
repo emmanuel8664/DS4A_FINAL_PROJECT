@@ -128,3 +128,4 @@ def get_prod_edad():
     df2 = descriptive_data.get_prod_edad()
     prod_edad = descriptive_plots.get_prod_edad(df2)
     return prod_edad
+

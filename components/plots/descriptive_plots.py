@@ -2,6 +2,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 import requests
 import folium
+import plotly.io as pio
+pio.templates
 
 
 def get_hist(df, eje_x, eje_y):
@@ -111,6 +113,6 @@ def get_map2(df):
     t.save('C:\\Users\\bolemm01\\Desktop\\Correlation1\\PROYECTO_FINAL\\assets\\mymap.html')
 
 def get_prod_edad(df):
-    fig = px.line(df, x="edad", y="tallos_planta", color='finca')
+    fig = px.line(df, x="edad", y="tallos_planta", color='finca', template='simple_white')
     return fig
     

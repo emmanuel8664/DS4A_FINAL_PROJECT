@@ -71,7 +71,7 @@ def build_content():
                 (
                     html.Div
                     (
-                        children = [dcc.Graph(figure=figuras['scatter'])]
+                        #children = [dcc.Graph(figure=figuras['scatter'])]
                     ),
                     md=12
                 )
@@ -82,8 +82,8 @@ def build_content():
 def get_figuras():
     figuras = {}
     figuras['bar'] = get_bar()
-    figuras['boxplot'] = get_boxplot()
-    figuras['scatter'] = get_scatter()
+    #figuras['boxplot'] = get_boxplot()
+    #figuras['scatter'] = get_scatter()
     return figuras
 
 def get_bar():

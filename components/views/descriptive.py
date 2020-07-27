@@ -66,9 +66,10 @@ def build_content():
             id="wait_time_card",
             children=
             [
-                html.B("Patient Wait Time and Satisfactory Scores"),
+                html.B("Gráficos"),
                 html.Hr(),
-                dcc.Graph(figure=figuras['heat_map']),
+                dcc.Graph(figure=figuras['prod_edad']),
+                
             ],
         ),
         html.Div
@@ -78,7 +79,7 @@ def build_content():
             [
                 html.B("Patient Wait Time and Satisfactory Scores"),
                 html.Hr(),
-                dcc.Graph(figure=figuras['line']),
+                dcc.Graph(figure=figuras['heat_map']),
             ],
         ),
     ]
@@ -88,6 +89,7 @@ def get_figuras():
     figuras['map'] = get_map2()
     figuras['heat_map'] = get_heatmap()
     figuras['line'] = get_line()
+    figuras['prod_edad'] = get_prod_edad()
     return figuras
 
 def get_map():
@@ -119,4 +121,10 @@ def get_map2():
     df = descriptive_data.get_map2()
     #mapa = descriptive_plots.get_map(df, descriptive_data.get_eje_x(), descriptive_data.get_eje_y())
     mapa2 = descriptive_plots.get_map2(df)
-    return mapa2 
+    return mapa2
+
+
+def get_prod_edad():
+    df2 = descriptive_data.get_prod_edad()
+    prod_edad = descriptive_plots.get_prod_edad(df2)
+    return prod_edad

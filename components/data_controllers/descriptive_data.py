@@ -41,3 +41,9 @@ class descriptive_data():
         result = pd.concat([df_production_map_2,df_fincas_map2], axis=1, join='inner')
         result2 = result.loc[:,~result.columns.duplicated()]
         return result2
+
+    def get_prod_edad(self):
+        df_production_edad = self.data_access.get_df_produccion()
+        df = df_production_edad.groupby(['finca','edad'])['tallos_planta'].mean()
+        df=df.add_suffix('').reset_index()
+        return df    

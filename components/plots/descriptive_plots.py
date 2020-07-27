@@ -109,3 +109,8 @@ def get_map2(df):
                        ).add_to(t)
 
     t.save('C:\\Users\\bolemm01\\Desktop\\Correlation1\\PROYECTO_FINAL\\assets\\mymap.html')
+
+def get_prod_edad(df):
+    fig = px.line(df, x="edad", y="tallos_planta", color='finca')
+    return fig
+    

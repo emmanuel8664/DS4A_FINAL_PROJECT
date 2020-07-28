@@ -85,6 +85,14 @@ class Filter:
                                 className="dcc_control",
                             ),
                         ]
+                    ),
+                    dbc.FormGroup(
+                        [
+                            html.P("Filtro para estaciones:", className="control_label"),
+                            dbc.RadioItems(id="radio-estaciones"+str(id),options=[{"label": "Día", "value": 1},{"label": "Mes", "value": 2}],),                
+                            dcc.Dropdown(id="categoria-estaciones"+str(id),options=[{"label": col, "value": col} for col in ['acacias', 'aljibe', 'cipres']],multi=False,value='aljibe',className="dcc_control",),
+                           
+                        ]
                     )
                 ],
                 body=True,

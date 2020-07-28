@@ -100,7 +100,7 @@ def get_scatter(df, eje_x, eje_y):
 
 
 def get_map2(df):
-    t = folium.Map([4.862437, -74.058655], zoom_start=11, tiles="Stamen Toner")
+    t = folium.Map([4.862437, -74.058655], zoom_start=11, tiles="Stamen Terrain")
 
     for index, row in df.iterrows():
         folium.CircleMarker([row['latitud'], row['longitud']],

@@ -7,11 +7,15 @@ class file_access(data_access):
         ruta_estacion = ruta_datos + '\\estacion.csv'
         ruta_produccion = ruta_datos + '\\produccion_color.csv'
         ruta_finca = ruta_datos + '\\finca.csv'
+        ruta_temperatura = ruta_datos + '\\temperatura.csv'
+        ruta_radiacion = ruta_datos + '\\radiacion.csv'
         #ruta_clima = ruta_datos + '\\clima.csv'
         def __init__(self):
             self.df_estacion = pd.read_csv(self.ruta_estacion, delimiter=',')
             self.df_produccion = pd.read_csv(self.ruta_produccion, delimiter=',',low_memory=False)
             self.df_finca = pd.read_csv(self.ruta_finca, delimiter=',',low_memory=False)
+            self.df_temperatura = pd.read_csv(self.ruta_temperatura, delimiter=',',low_memory=False)
+            self.df_radiacion = pd.read_csv(self.ruta_radiacion, delimiter=',',low_memory=False)
             #self.df_clima = pd.read_csv(self.ruta_clima, delimiter=',',low_memory=False)
             #data_finca = pd.read_csv(route+"\data\finca.csv", delimiter=',',low_memory=False)
             #print(self.df_produccion)
@@ -26,4 +30,8 @@ class file_access(data_access):
     def get_df_clima(self):
         return self.instance.df_clima
     def get_df_finca(self):
-        return self.instance.df_finca    
+        return self.instance.df_finca
+    def get_df_temperatura(self):     
+        return self.instance.df_temperatura
+    def get_df_radiacion(self):
+        return self.instance.df_radiacion          

@@ -115,4 +115,72 @@ def get_map2(df):
 def get_prod_edad(df):
     fig = px.line(df, x="edad", y="tallos_planta", color='finca', template='simple_white')
     return fig
-    
+
+def get_heatmap_temp_mean(df):  
+    fig = go.Figure(data=go.Heatmap(
+                   z=df.acacias,
+                   x=df.Month,
+                   y=df.Hora_single,
+                   xgap = 0.7,
+                   ygap = 0.7,
+                   colorscale='Viridis',
+                   hoverongaps = False))
+
+    fig.update_layout(
+        yaxis = {'categoryorder':"total ascending"},
+        xaxis = {'type':'category'},
+    )
+
+    return fig
+
+def get_heatmap_temp_min(df):  
+    fig = go.Figure(data=go.Heatmap(
+                   z=df.acacias,
+                   x=df.Month,
+                   y=df.Hora_single,
+                   xgap = 0.7,
+                   ygap = 0.7,
+                   colorscale='Viridis',
+                   hoverongaps = False))
+
+    fig.update_layout(
+        yaxis = {'categoryorder':"total ascending"},
+        xaxis = {'type':'category'},
+    )
+
+    return fig
+
+def get_heatmap_temp_max(df):  
+    fig = go.Figure(data=go.Heatmap(
+                   z=df.acacias,
+                   x=df.Month,
+                   y=df.Hora_single,
+                   xgap = 0.7,
+                   ygap = 0.7,
+                   colorscale='Viridis',
+                   hoverongaps = False))
+
+    fig.update_layout(
+        yaxis = {'categoryorder':"total ascending"},
+        xaxis = {'type':'category'},
+    )
+
+    return fig
+
+
+def get_heatmap_rad_mean(df):  
+    fig = go.Figure(data=go.Heatmap(
+                   z=df.acacias,
+                   x=df.Month,
+                   y=df.Hora_single,
+                   xgap = 0.7,
+                   ygap = 0.7,
+                   colorscale='Viridis',
+                   hoverongaps = False))
+
+    fig.update_layout(
+        yaxis = {'categoryorder':"total ascending"},
+        xaxis = {'type':'category'},
+    )
+
+    return fig 

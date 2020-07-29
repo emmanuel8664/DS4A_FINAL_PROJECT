@@ -75,14 +75,44 @@ def build_content():
         html.Div
         (
             id="wait_time_card2",
-            children=
-            [
-                html.B("Patient Wait Time and Satisfactory Scores"),
-                html.Hr(),
-                dcc.Graph(figure=figuras['heat_map']),
-            ],
+            children=build_tabs2()
+            
         ),
     ]
+
+def build_tabs2():
+    
+    print('Construcción de los mapas de calor')
+    return  dbc.Tabs(
+            [
+                dbc.Tab(build_heatmap_temp_mean(), label="Temperatura_promedio"),
+                dbc.Tab(build_heatmap_temp_max(), label="Temperatura_máxima"),
+                dbc.Tab(build_heatmap_temp_min(), label="Temperatura_mínima"),
+                dbc.Tab(build_heatmap_rad_mean(), label="Radiación_promedio")
+            ],
+            id="tabs2",
+            active_tab="descriptive2",
+            className="navbar navbar-expand-md",
+        )
+
+#   return dbc.Card(html.Div(dcc.Graph(figure=figuras['bar'])))
+
+def build_heatmap_temp_mean():
+    figuras = get_figuras()
+    return dbc.Card(html.Div(dcc.Graph(figure=figuras['heatmap_temp_mean'])))
+
+def build_heatmap_temp_max():
+    figuras = get_figuras()
+    return dbc.Card(html.Div(dcc.Graph(figure=figuras['heatmap_temp_max'])))
+
+def build_heatmap_temp_min():
+    figuras = get_figuras()
+    return dbc.Card(html.Div(dcc.Graph(figure=figuras['heatmap_temp_min'])))
+
+def build_heatmap_rad_mean():
+    figuras = get_figuras()
+    return dbc.Card(html.Div(dcc.Graph(figure=figuras['heatmap_rad_mean'])))       
+
 
 def get_figuras():
     figuras = {}
@@ -90,6 +120,10 @@ def get_figuras():
     figuras['heat_map'] = get_heatmap()
     figuras['line'] = get_line()
     figuras['prod_edad'] = get_prod_edad()
+    figuras['heatmap_temp_mean'] = get_heatmap_temp_mean()
+    figuras['heatmap_temp_min']= get_heatmap_temp_min()
+    figuras['heatmap_temp_max']= get_heatmap_temp_max()
+    figuras['heatmap_rad_mean']= get_heatmap_rad_mean()
     return figuras
 
 def get_map():
@@ -129,3 +163,22 @@ def get_prod_edad():
     prod_edad = descriptive_plots.get_prod_edad(df2)
     return prod_edad
 
+def get_heatmap_temp_mean():
+    df3 = descriptive_data.get_heatmap_temp_mean()
+    heatMap_temp_med = descriptive_plots.get_heatmap_temp_mean(df3)
+    return heatMap_temp_med
+
+def get_heatmap_temp_min():
+    df3 = descriptive_data.get_heatmap_temp_min()
+    heatMap_temp_min = descriptive_plots.get_heatmap_temp_min(df3)
+    return heatMap_temp_min
+
+def get_heatmap_temp_max():
+    df4 = descriptive_data.get_heatmap_temp_max()
+    heatMap_temp_max = descriptive_plots.get_heatmap_temp_max(df4)
+    return heatMap_temp_max
+
+def get_heatmap_rad_mean():
+    df5 = descriptive_data.get_heatmap_rad_mean()
+    heatMap_rad_mean = descriptive_plots.get_heatmap_rad_mean(df5)
+    return heatMap_rad_mean

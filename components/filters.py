@@ -33,6 +33,12 @@ class Filter:
             initial_value = list_dates_converted[0]
             last_value = list_dates_converted[len(list_dates_converted)-1]
 
+
+            temperatura = data_access.get_df_temperatura()
+            estaciones = temperatura.columns[2:-2]
+            estacion = "acacias"
+
+
             type_flowers = ["All ", "Claveles", "Miniclaveles"]
             filtro = dbc.Card(
                 [
@@ -90,7 +96,7 @@ class Filter:
                         [
                             html.P("Filtro para estaciones:", className="control_label"),
                             dbc.RadioItems(id="radio-estaciones"+str(id),options=[{"label": "Día", "value": 1},{"label": "Mes", "value": 2}],),                
-                            dcc.Dropdown(id="categoria-estaciones"+str(id),options=[{"label": col, "value": col} for col in ['acacias', 'aljibe', 'cipres']],multi=False,value='aljibe',className="dcc_control",),
+                            dcc.Dropdown(id="categoria-estaciones"+str(id),options=[{"label": col, "value": col} for col in estaciones],multi=False,value=estacion,className="dcc_control",),
                            
                         ]
                     )

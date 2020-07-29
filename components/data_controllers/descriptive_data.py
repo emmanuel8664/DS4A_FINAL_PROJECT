@@ -46,4 +46,96 @@ class descriptive_data():
         df_production_edad = self.data_access.get_df_produccion()
         df = df_production_edad.groupby(['finca','edad'])['tallos_planta'].mean()
         df=df.add_suffix('').reset_index()
-        return df    
+        return df
+
+    def get_heatmap_temp_mean(self):
+
+        def hora_hora(x): return int(x[0:2]) 
+
+        tem = self.data_access.get_df_temperatura()
+        tem['Fecha'] = pd.to_datetime(tem['Fecha'])
+        tem['Day_week']  = tem['Fecha'].dt.day_name()
+        tem["Hora_single"] = tem["Hora"].apply(hora_hora)
+        df_tem_mean_hora = tem.groupby(['Fecha','Day_week','Hora_single']).mean()
+        
+        estacion = "acacias"
+        filtro = "Month"
+
+        df_tem_mean_hora_finca = df_tem_mean_hora.filter([estacion])
+        dist = df_tem_mean_hora_finca.reset_index(level=[0,1,2])
+        dist['Month'] = dist['Fecha'].dt.strftime('%B')
+        dist['year'] = pd.DatetimeIndex(dist['Fecha']).year
+        dist['day'] = dist['Fecha'].dt.day
+        dist=dist.groupby([filtro,'Hora_single'])['acacias'].mean()
+        df = dist.to_frame()
+        dist_df = df.reset_index(level=[0,1])
+        return dist_df
+
+    def get_heatmap_temp_min(self):
+
+        def hora_hora(x): return int(x[0:2]) 
+
+        tem = self.data_access.get_df_temperatura()
+        tem['Fecha'] = pd.to_datetime(tem['Fecha'])
+        tem['Day_week']  = tem['Fecha'].dt.day_name()
+        tem["Hora_single"] = tem["Hora"].apply(hora_hora)
+        df_tem_min_hora = tem.groupby(['Fecha','Day_week','Hora_single']).min()
+        
+        estacion = "acacias"
+        filtro = "Month"
+
+        df_tem_min_hora_finca = df_tem_min_hora.filter([estacion])
+        dist = df_tem_min_hora_finca.reset_index(level=[0,1,2])
+        dist['Month'] = dist['Fecha'].dt.strftime('%B')
+        dist['year'] = pd.DatetimeIndex(dist['Fecha']).year
+        dist['day'] = dist['Fecha'].dt.day
+        dist=dist.groupby([filtro,'Hora_single'])['acacias'].mean()
+        df = dist.to_frame()
+        dist_df = df.reset_index(level=[0,1])
+        return dist_df
+      
+    def get_heatmap_temp_max(self):
+
+        def hora_hora(x): return int(x[0:2]) 
+
+        tem = self.data_access.get_df_temperatura()
+        tem['Fecha'] = pd.to_datetime(tem['Fecha'])
+        tem['Day_week']  = tem['Fecha'].dt.day_name()
+        tem["Hora_single"] = tem["Hora"].apply(hora_hora)
+        df_tem_max_hora = tem.groupby(['Fecha','Day_week','Hora_single']).max()
+        
+        estacion = "acacias"
+        filtro = "Month"
+
+        df_tem_max_hora_finca = df_tem_max_hora.filter([estacion])
+        dist = df_tem_max_hora_finca.reset_index(level=[0,1,2])
+        dist['Month'] = dist['Fecha'].dt.strftime('%B')
+        dist['year'] = pd.DatetimeIndex(dist['Fecha']).year
+        dist['day'] = dist['Fecha'].dt.day
+        dist=dist.groupby([filtro,'Hora_single'])['acacias'].mean()
+        df = dist.to_frame()
+        dist_df = df.reset_index(level=[0,1])
+        return dist_df
+
+    def get_heatmap_rad_mean(self):
+
+        def hora_hora(x): return int(x[0:2]) 
+
+        tem = self.data_access.get_df_radiacion()
+        tem['Fecha'] = pd.to_datetime(tem['Fecha'])
+        tem['Day_week']  = tem['Fecha'].dt.day_name()
+        tem["Hora_single"] = tem["Hora"].apply(hora_hora)
+        df_tem_mean_hora = tem.groupby(['Fecha','Day_week','Hora_single']).mean()
+        
+        estacion = "acacias"
+        filtro = "Month"
+
+        df_tem_mean_hora_finca = df_tem_mean_hora.filter([estacion])
+        dist = df_tem_mean_hora_finca.reset_index(level=[0,1,2])
+        dist['Month'] = dist['Fecha'].dt.strftime('%B')
+        dist['year'] = pd.DatetimeIndex(dist['Fecha']).year
+        dist['day'] = dist['Fecha'].dt.day
+        dist=dist.groupby([filtro,'Hora_single'])['acacias'].mean()
+        df = dist.to_frame()
+        dist_df = df.reset_index(level=[0,1])
+        return dist_df

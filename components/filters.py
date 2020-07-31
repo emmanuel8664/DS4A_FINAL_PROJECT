@@ -27,6 +27,8 @@ class Filter:
             list_colors = data_produccion['Color'].unique()
             list_colors = list_colors
             list_colors_without_nan=np.delete(list_colors,22)
+
+            data_estaciones = data_access.get_df_estacion()
             
             list_dates = np.sort(data_produccion['anosemana'].unique())
             list_dates_converted = pd.to_datetime(list_dates)
@@ -36,7 +38,7 @@ class Filter:
 
             temperatura = data_access.get_df_temperatura()
             estaciones = temperatura.columns[2:-2]
-            estacion = "acacias"
+            estacion = data_access.get_filtros_clima()['estacion']
 
 
             type_flowers = ["All ", "Claveles", "Miniclaveles"]
@@ -57,7 +59,7 @@ class Filter:
                      dbc.FormGroup(
                         [
                             html.P("Filtro para fincas:", className="control_label"),
-                            dbc.RadioItems(id="radio-fincas"+str(id),options=[{"label": "All", "value": 1},],),                
+                            #dbc.RadioItems(id="radio-fincas"+str(id),options=[{"label": "All", "value": 1},],),                
                             dcc.Dropdown(id="categoria"+str(id),options=[{"label": col, "value": col} for col in list_fincas],multi=True,value=list_fincas,className="dcc_control",),
                            
                         ]
@@ -65,7 +67,7 @@ class Filter:
                      dbc.FormGroup(
                         [
                             html.P("Filtro para colores:", className="control_label"),
-                            dbc.RadioItems(id="radio-color"+str(id),options=[{"label": "All", "value": 1},],),                
+                            #dbc.RadioItems(id="radio-color"+str(id),options=[{"label": "All", "value": 1},],),                
                             dcc.Dropdown(id="categoria-color"+str(id),options=[{"label": col, "value": col} for col in list_colors_without_nan],multi=True,value=list_colors_without_nan,className="dcc_control",),
                            
                         ]

@@ -18,8 +18,8 @@ class predictive_data():
         data_produccion=df_redes[(df_redes['finca']==finca) & (df_redes['Color']==color) & (df_redes['dia']>=fechaInicial)]
         filter_dataset = data_produccion.copy()
 
-        filter_dataset['%Cumplimiento_finca']= filter_dataset[' tallos_reales '].astype('float')/filter_dataset[' tallos_metodo_finca '].astype('float')
-        filter_dataset['%Cumplimiento_red_neuronal']= filter_dataset[' tallos_reales '].astype('float')/filter_dataset[' tallos_red '].astype('float')
+        filter_dataset['%Cumplimiento_finca']= filter_dataset['tallos_reales'].astype('float')/filter_dataset['tallos_metodo_finca'].astype('float')
+        filter_dataset['%Cumplimiento_red_neuronal']= filter_dataset['tallos_reales'].astype('float')/filter_dataset['tallos_red'].astype('float')
         
         filter_dataset = filter_dataset.filter(items=['dia','%Cumplimiento_finca','%Cumplimiento_red_neuronal'])
         filter_dataset['lim_inf']='0.95'
@@ -30,5 +30,3 @@ class predictive_data():
     def get_temp(self):
         weather = self.data_access.get_df_weather()
         return weather
-
-

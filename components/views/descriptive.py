@@ -9,6 +9,8 @@ from components.plots import descriptive_plots
 
 descriptive_data = descriptive_data()
 filtro = Filter()
+ruta_datos = r"D:\\Documentos\\Certificación DS4A\\Proyecto\\Git final\\DS4A_FINAL_PROJECT\\data"
+#ruta_datos = r"C:\\Users\\bolemm01\\Desktop\\Correlation1\\PROYECTO_FINAL\\data"
 
 def build_descriptive():
     return dbc.Card(
@@ -56,7 +58,7 @@ def build_content():
             [
                 html.B("Fincas con su coeficiente"),
                 html.Hr(),
-                html.Iframe(id='mapFincas',srcDoc = open('C:\\Users\\bolemm01\\Desktop\\Correlation1\\PROYECTO_FINAL\\assets\\mymap.html', 'r').read(),width='100%',height='600')
+                html.Iframe(id='mapFincas',srcDoc = open(ruta_datos+'\\mymap.html', 'r').read(),width='100%',height='600')
                 #dcc.Graph(figure = figuras['map']),
             ],
         ),
@@ -68,7 +70,7 @@ def build_content():
             [
                 html.B("Gráficos"),
                 html.Hr(),
-                dcc.Graph(figure=figuras['prod_edad']),
+                dcc.Graph(id='fig_desc_prod_edad', figure=figuras['prod_edad']),
                 
             ],
         ),
@@ -99,24 +101,25 @@ def build_tabs2():
 
 def build_heatmap_temp_mean():
     figuras = get_figuras()
-    return dbc.Card(html.Div(dcc.Graph(figure=figuras['heatmap_temp_mean'])))
+    return dbc.Card(html.Div(dcc.Graph(id = 'heatmap_temp_mean', figure=figuras['heatmap_temp_mean'])))
 
 def build_heatmap_temp_max():
     figuras = get_figuras()
-    return dbc.Card(html.Div(dcc.Graph(figure=figuras['heatmap_temp_max'])))
+    return dbc.Card(html.Div(dcc.Graph(id = 'heatmap_temp_max', figure=figuras['heatmap_temp_max'])))
 
 def build_heatmap_temp_min():
     figuras = get_figuras()
-    return dbc.Card(html.Div(dcc.Graph(figure=figuras['heatmap_temp_min'])))
+    return dbc.Card(html.Div(dcc.Graph(id = 'heatmap_temp_min', figure=figuras['heatmap_temp_min'])))
 
 def build_heatmap_rad_mean():
     figuras = get_figuras()
-    return dbc.Card(html.Div(dcc.Graph(figure=figuras['heatmap_rad_mean'])))       
+    return dbc.Card(html.Div(dcc.Graph(id = 'heatmap_rad_mean', figure=figuras['heatmap_rad_mean'])))       
 
 
 def get_figuras():
     figuras = {}
-    figuras['map'] = get_map2()
+    #figuras['map'] = get_map2()
+    get_map2()
     figuras['heat_map'] = get_heatmap()
     figuras['line'] = get_line()
     figuras['prod_edad'] = get_prod_edad()
@@ -154,8 +157,9 @@ def get_line():
 def get_map2():
     df = descriptive_data.get_map2()
     #mapa = descriptive_plots.get_map(df, descriptive_data.get_eje_x(), descriptive_data.get_eje_y())
-    mapa2 = descriptive_plots.get_map2(df)
-    return mapa2
+    #mapa2 = descriptive_plots.get_map2(df)
+    descriptive_plots.get_map2(df)
+    #return mapa2
 
 
 def get_prod_edad():

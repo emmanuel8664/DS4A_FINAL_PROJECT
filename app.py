@@ -7,7 +7,8 @@ import plotly.graph_objs as go
 from dash.dependencies import Input, Output
 
 from components.tabs import *
-#from callbacks import register_callbacks
+#from components.callbacks.filter-callbacks import register_filter_callbacks
+from components.callbacks.descriptive_callbacks import register_descriptive_callbacks
 
 
 
@@ -37,7 +38,8 @@ app.layout = dbc.Container(
 #     style={"display": "flex", "flex-direction": "column"},
 # )
 
-#register_callbacks(app)
+#register_filter_callbacks(app)
+register_descriptive_callbacks(app)
 
 # Main
 if __name__ == "__main__":

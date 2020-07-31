@@ -50,6 +50,8 @@ class descriptive_data():
 
     def get_heatmap_temp_mean(self):
 
+        filtros_temperaturas = self.data_access.get_filtros_clima()
+
         def hora_hora(x): return int(x[0:2]) 
 
         tem = self.data_access.get_df_temperatura()
@@ -58,8 +60,8 @@ class descriptive_data():
         tem["Hora_single"] = tem["Hora"].apply(hora_hora)
         df_tem_mean_hora = tem.groupby(['Fecha','Day_week','Hora_single']).mean()
         
-        estacion = "acacias"
-        filtro = "Month"
+        estacion = filtros_temperaturas['estacion']
+        filtro = filtros_temperaturas['rango_clima']
 
         df_tem_mean_hora_finca = df_tem_mean_hora.filter([estacion])
         dist = df_tem_mean_hora_finca.reset_index(level=[0,1,2])
@@ -68,13 +70,16 @@ class descriptive_data():
         dist['Month'] = dist['Fecha'].dt.strftime('%B')
         dist['year'] = pd.DatetimeIndex(dist['Fecha']).year
         dist['day'] = dist['Fecha'].dt.day
-        dist=dist.groupby([filtro,'Month_number','Hora_single'])['acacias'].mean()
+        dist=dist.groupby([filtro,'Hora_single'])[estacion].mean()
         df = dist.to_frame()
-        dist_df = df.reset_index(level=[0,1,2])
-        dist_df=dist_df.sort_values(by=['Month_number'])
+        dist_df = df.reset_index(level=[0,1])
+        dist_df['x'] = dist_df[filtro]
+        dist_df['z'] = dist_df[estacion]
         return dist_df
 
     def get_heatmap_temp_min(self):
+
+        filtros_temperaturas = self.data_access.get_filtros_clima()
 
         def hora_hora(x): return int(x[0:2]) 
 
@@ -84,8 +89,8 @@ class descriptive_data():
         tem["Hora_single"] = tem["Hora"].apply(hora_hora)
         df_tem_min_hora = tem.groupby(['Fecha','Day_week','Hora_single']).min()
         
-        estacion = "acacias"
-        filtro = "Month"
+        estacion = filtros_temperaturas['estacion']
+        filtro = filtros_temperaturas['rango_clima']
 
         df_tem_min_hora_finca = df_tem_min_hora.filter([estacion])
         dist = df_tem_min_hora_finca.reset_index(level=[0,1,2])
@@ -94,13 +99,16 @@ class descriptive_data():
         dist['Month'] = dist['Fecha'].dt.strftime('%B')
         dist['year'] = pd.DatetimeIndex(dist['Fecha']).year
         dist['day'] = dist['Fecha'].dt.day
-        dist=dist.groupby([filtro,'Month_number','Hora_single'])['acacias'].mean()
+        dist=dist.groupby([filtro,'Hora_single'])[estacion].mean()
         df = dist.to_frame()
-        dist_df = df.reset_index(level=[0,1,2])
-        dist_df=dist_df.sort_values(by=['Month_number'])
+        dist_df = df.reset_index(level=[0,1])
+        dist_df['x'] = dist_df[filtro]
+        dist_df['z'] = dist_df[estacion]
         return dist_df
       
     def get_heatmap_temp_max(self):
+
+        filtros_temperaturas = self.data_access.get_filtros_clima()
 
         def hora_hora(x): return int(x[0:2]) 
 
@@ -110,8 +118,8 @@ class descriptive_data():
         tem["Hora_single"] = tem["Hora"].apply(hora_hora)
         df_tem_max_hora = tem.groupby(['Fecha','Day_week','Hora_single']).max()
         
-        estacion = "acacias"
-        filtro = "Month"
+        estacion = filtros_temperaturas['estacion']
+        filtro = filtros_temperaturas['rango_clima']
 
         df_tem_max_hora_finca = df_tem_max_hora.filter([estacion])
         dist = df_tem_max_hora_finca.reset_index(level=[0,1,2])
@@ -120,13 +128,16 @@ class descriptive_data():
         dist['Month'] = dist['Fecha'].dt.strftime('%B')
         dist['year'] = pd.DatetimeIndex(dist['Fecha']).year
         dist['day'] = dist['Fecha'].dt.day
-        dist=dist.groupby([filtro,'Month_number','Hora_single'])['acacias'].mean()
+        dist=dist.groupby([filtro,'Hora_single'])[estacion].mean()
         df = dist.to_frame()
-        dist_df = df.reset_index(level=[0,1,2])
-        dist_df=dist_df.sort_values(by=['Month_number'])
+        dist_df = df.reset_index(level=[0,1])
+        dist_df['x'] = dist_df[filtro]
+        dist_df['z'] = dist_df[estacion]
         return dist_df
 
     def get_heatmap_rad_mean(self):
+
+        filtros_temperaturas = self.data_access.get_filtros_clima()
 
         def hora_hora(x): return int(x[0:2]) 
 
@@ -136,8 +147,8 @@ class descriptive_data():
         tem["Hora_single"] = tem["Hora"].apply(hora_hora)
         df_tem_mean_hora = tem.groupby(['Fecha','Day_week','Hora_single']).mean()
         
-        estacion = "acacias"
-        filtro = "Month"
+        estacion = filtros_temperaturas['estacion']
+        filtro = filtros_temperaturas['rango_clima']
 
         df_tem_mean_hora_finca = df_tem_mean_hora.filter([estacion])
         dist = df_tem_mean_hora_finca.reset_index(level=[0,1,2])
@@ -147,8 +158,9 @@ class descriptive_data():
         dist['Month'] = dist['Fecha'].dt.strftime('%B')
         dist['year'] = pd.DatetimeIndex(dist['Fecha']).year
         dist['day'] = dist['Fecha'].dt.day
-        dist=dist.groupby([filtro,'Month_number','Hora_single'])['acacias'].mean()
+        dist=dist.groupby([filtro,'Hora_single'])[estacion].mean()
         df = dist.to_frame()
-        dist_df = df.reset_index(level=[0,1,2])
-        dist_df=dist_df.sort_values(by=['Month_number'])
+        dist_df = df.reset_index(level=[0,1])
+        dist_df['x'] = dist_df[filtro]
+        dist_df['z'] = dist_df[estacion]
         return dist_df

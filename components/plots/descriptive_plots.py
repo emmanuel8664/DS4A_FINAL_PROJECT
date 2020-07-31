@@ -5,6 +5,9 @@ import folium
 import plotly.io as pio
 pio.templates
 
+ruta_datos = r"D:\\Documentos\\Certificación DS4A\\Proyecto\\Git final\\DS4A_FINAL_PROJECT\\data"
+#ruta_datos = r"C:\\Users\\bolemm01\\Desktop\\Correlation1\\PROYECTO_FINAL\\data"
+
 
 def get_hist(df, eje_x, eje_y):
     #data_canada = data[data.country == 'Canada']
@@ -22,8 +25,7 @@ def get_heatmap():
     fig = go.Figure(data=go.Heatmap(
                    z=[[1, None, 30, 50, 1], [20, 1, 60, 80, 30], [30, 60, 1, -10, 20]],
                    x=['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-                   y=['Morning', 'Afternoon', 'Evening']))#,
-                   #hoverongaps = False))
+                   y=['Morning', 'Afternoon', 'Evening'],hoverongaps = False))
     return fig
 
 def get_line():
@@ -110,16 +112,16 @@ def get_map2(df):
                         fill_color="#3db7e4",
                        ).add_to(t)
 
-    t.save('C:\\Users\\bolemm01\\Desktop\\Correlation1\\PROYECTO_FINAL\\assets\\mymap.html')
+    t.save(ruta_datos+'\\mymap.html')
 
 def get_prod_edad(df):
-    fig = px.line(df, x="edad", y="tallos_planta", color='finca', template='simple_white')
+    fig = px.line(df, x="edad", y="tallos_planta", color='finca', template='simple_white', labels={'edad':'Age(week)','tallos_planta':'Stems/plant', 'finca':'Farm'})
     return fig
 
 def get_heatmap_temp_mean(df):  
     fig = go.Figure(data=go.Heatmap(
-                   z=df.acacias,
-                   x=df.Month,
+                   z=df.z,
+                   x=df.x,
                    y=df.Hora_single,
                    xgap = 0.7,
                    ygap = 0.7,
@@ -135,8 +137,8 @@ def get_heatmap_temp_mean(df):
 
 def get_heatmap_temp_min(df):  
     fig = go.Figure(data=go.Heatmap(
-                   z=df.acacias,
-                   x=df.Month,
+                   z=df.z,
+                   x=df.x,
                    y=df.Hora_single,
                    xgap = 0.7,
                    ygap = 0.7,
@@ -152,8 +154,8 @@ def get_heatmap_temp_min(df):
 
 def get_heatmap_temp_max(df):  
     fig = go.Figure(data=go.Heatmap(
-                   z=df.acacias,
-                   x=df.Month,
+                   z=df.z,
+                   x=df.x,
                    y=df.Hora_single,
                    xgap = 0.7,
                    ygap = 0.7,
@@ -170,8 +172,8 @@ def get_heatmap_temp_max(df):
 
 def get_heatmap_rad_mean(df):  
     fig = go.Figure(data=go.Heatmap(
-                   z=df.acacias,
-                   x=df.Month,
+                   z=df.z,
+                   x=df.x,
                    y=df.Hora_single,
                    xgap = 0.7,
                    ygap = 0.7,

@@ -9,13 +9,8 @@ class predictive_data():
         self.data_access = file_access()
 
     def get_redes(self):
-        df_redes = self.data_access.get_df_redes()
-
-        finca='FV'
-        color='DarkPink'
-        fechaInicial='2019-06-01'
-
-        data_produccion=df_redes[(df_redes['finca']==finca) & (df_redes['Color']==color) & (df_redes['dia']>=fechaInicial)]
+        data_produccion = self.data_access.get_df_redes()
+        
         filter_dataset = data_produccion.copy()
 
         filter_dataset['%Cumplimiento_finca']= filter_dataset['tallos_reales'].astype('float')/filter_dataset['tallos_metodo_finca'].astype('float')

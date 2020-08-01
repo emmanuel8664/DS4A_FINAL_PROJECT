@@ -44,11 +44,21 @@ class file_access(data_access):
                 return df
             else:
                 return df[df[finca].isin(self.data_filter.get_fincas())]
+        def realizar_filtro_finca(self, df, finca):
+            if not self.data_filter.get_finca():
+                return df
+            else:
+                return df[df[finca].isin([self.data_filter.get_finca()])]
         def realizar_filtro_colores(self, df, color):
             if not self.data_filter.get_colores():
                 return df
             else:
                 return df[df[color].isin(self.data_filter.get_colores())]
+        def realizar_filtro_color(self, df, color):
+            if not self.data_filter.get_color():
+                return df
+            else:
+                return df[df[color].isin([self.data_filter.get_color()])]
         def realizar_filtro_estaciones(self, df, estacion):
             if not self.data_filter.get_estaciones():
                 return df
@@ -58,7 +68,7 @@ class file_access(data_access):
             if not self.data_filter.get_estacion():
                 return df
             else:
-                return df[df[estacion].isin(self.data_filter.get_estacion())]
+                return df[df[estacion].isin([self.data_filter.get_estacion()])]
         def realizar_filtro_variedades(self, df, variedad):
             if not self.data_filter.get_variedades():
                 return df
@@ -86,6 +96,17 @@ class file_access(data_access):
             retorno = self.df_radiacion.copy()
             retorno = self.realizar_filtro_fechas(retorno, 'Fecha')
             return retorno
+        def get_df_redes(self):
+            retorno = self.df_redes.copy()
+            retorno = self.realizar_filtro_fechas(retorno, 'dia')
+            retorno = self.realizar_filtro_finca(retorno, 'finca')
+            retorno = self.realizar_filtro_color(retorno, 'Color')
+            return retorno
+        def get_df_weather(self):
+            retorno = self.df_weather.copy()
+            #retorno = self.realizar_filtro_estacion(retorno, 'estacion')
+            #retorno = self.realizar_filtro_fechas(retorno, 'dt_txt')
+            return retorno
         def get_filtros_clima(self):
             retorno = {}
             retorno['estacion'] = self.data_filter.get_estacion()
@@ -108,8 +129,8 @@ class file_access(data_access):
     def get_df_radiacion(self):
         return self.instance.get_df_radiacion()
     def get_df_redes(self):
-        return self.instance.df_redes
+        return self.instance.get_df_redes()
     def get_df_weather(self):
-        return self.instance.df_weather
+        return self.instance.get_df_weather()
     def get_filtros_clima(self):
         return self.instance.get_filtros_clima()

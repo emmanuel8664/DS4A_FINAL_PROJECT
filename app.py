@@ -9,6 +9,7 @@ from dash.dependencies import Input, Output
 from components.tabs import *
 #from components.callbacks.filter-callbacks import register_filter_callbacks
 from components.callbacks.descriptive_callbacks import register_descriptive_callbacks
+from components.callbacks.predictive_callbacks import register_predictive_callbacks
 
 
 
@@ -40,6 +41,7 @@ app.layout = dbc.Container(
 
 #register_filter_callbacks(app)
 register_descriptive_callbacks(app)
+register_predictive_callbacks(app)
 
 # Main
 if __name__ == "__main__":

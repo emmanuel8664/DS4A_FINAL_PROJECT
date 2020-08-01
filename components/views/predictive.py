@@ -2,11 +2,12 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 
-from components.filters import Filter
+from components.predictive_filters import Predictive_filter
 from components.data_controllers.predictive_data import predictive_data
 from components.plots import predictive_plots
 
 predictive_data = predictive_data()
+filtro = Predictive_filter()
 
 
 def build_predictive():
@@ -21,7 +22,7 @@ def build_predictive():
                         (
                             html.Div
                             (
-                                #filtro.get_filtro()
+                                filtro.get_filtro()
                             ),
                             md=2
                         ),
@@ -56,7 +57,7 @@ def build_content():
             children=
             [
                 html.B("Proyeccion"),
-                dcc.Graph(figure = figuras['red_neuronal']),
+                dcc.Graph(id = 'red_neuronal', figure = figuras['red_neuronal']),
             ],
         ),
         # Patient Wait time by Department
@@ -66,7 +67,7 @@ def build_content():
             children=
             [
                 html.B("Temperatura"),
-                dcc.Graph(figure = figuras['temp2']),
+                dcc.Graph(id = 'predictive_temperatura', figure = figuras['temp2']),
                 
             ],
         )

@@ -2,11 +2,12 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 
-from components.filters import Filter
+from components.predictive_filters import Predictive_filter
 from components.data_controllers.predictive_data import predictive_data
 from components.plots import predictive_plots
 
 predictive_data = predictive_data()
+filtro = Predictive_filter()
 
 
 def build_predictive():
@@ -19,11 +20,17 @@ def build_predictive():
                     [
                         dbc.Col
                         (
-                            html.Div
-                            (
-                                #filtro.get_filtro()
-                            ),
-                            md=2
+                            [
+                                html.Div
+                                (
+                                    filtro.get_filtro()
+                                ),
+                                html.Div
+                                (
+                                    dcc.Graph(id = 'wind', figure = get_wind())
+                                )
+                            ],
+                            md=3
                         ),
                         dbc.Col
                         (
@@ -34,41 +41,63 @@ def build_predictive():
                                 children=build_content()
                             ),
                         )
-                        # dbc.Col(html.Div([
-                        # dcc.Graph(figure=fig)
-                        # ]),md=8)
-                        #dbc.Col(dbc.Row([dbc.Col(html.Div("Content1"),md=6),dbc.Col(html.Div("Content2"),md=6)]),md=8),
                     ]
                 ),
             ]
         )
     )
 
+def build_tabs3():
+    return  dbc.Tabs(
+            [
+                dbc.Tab(build_graph_temp_2(), label="Temperature Change"),
+                dbc.Tab(build_graph_temp_1(), label="Meanfeals vs Temperature"),
+            ],
+            id="tabs3",
+            className="navbar navbar-expand-md",
+        )
 
+
+def build_tabs4():
+    return  dbc.Tabs(
+            [
+                dbc.Tab(build_graph_red_2(), label="Forecast"),
+                dbc.Tab(build_graph_red_1(), label="Compliance"),
+                
+            ],
+            id="tabs4",
+            className="navbar navbar-expand-md",
+        )
+
+def build_graph_red_1():
+    figuras = get_figuras()
+    return dbc.Card(html.Div(dcc.Graph(id = 'red1', figure=figuras['red_neuronal'])))
+
+def build_graph_red_2():
+    figuras = get_figuras()
+    return dbc.Card(html.Div(dcc.Graph(id = 'red2', figure=figuras['proyeccion'])))
+
+def build_graph_temp_1():
+    figuras = get_figuras()
+    return dbc.Card(html.Div(dcc.Graph(id = 'temperatura1', figure=figuras['temp'])))
+
+def build_graph_temp_2():
+    figuras = get_figuras()
+    return dbc.Card(html.Div(dcc.Graph(id = 'temperatura2', figure=figuras['temp2'])))
 
 def build_content():
     figuras = get_figuras()
     return [
-        # Patient Volume Heatmap
         html.Div
         (
             id="proyeccion",
-            children=
-            [
-                html.B("Proyeccion"),
-                dcc.Graph(figure = figuras['red_neuronal']),
-            ],
+            children=build_tabs4()
         ),
-        # Patient Wait time by Department
         html.Div
         (
             id="temperatura",
-            children=
-            [
-                html.B("Temperatura"),
-                dcc.Graph(figure = figuras['temp2']),
+            children=build_tabs3()
                 
-            ],
         )
     ]
 
@@ -77,6 +106,8 @@ def get_figuras():
     figuras['red_neuronal'] = get_redes()
     figuras['temp'] = get_temp()
     figuras['temp2'] = get_temp2()
+    figuras['wind'] = get_wind()
+    figuras['proyeccion'] = get_pronostico()
     return figuras   
 
 def get_redes():
@@ -93,4 +124,16 @@ def get_temp():
 def get_temp2():
     df4 = predictive_data.get_temp()
     temp2 = predictive_plots.get_temp2(df4)
-    return temp2    
+    return temp2
+
+
+def get_wind():
+    df5 = predictive_data.get_wind()
+    wind = predictive_plots.get_wind(df5)
+    return wind
+
+def get_pronostico():
+    df6 = predictive_data.get_proyeccion()
+    max_data = predictive_data.get_max_data()
+    proy = predictive_plots.get_proyeccion(df6,max_data)
+    return proy

@@ -112,6 +112,22 @@ def register_descriptive_callbacks(app):
         mapFincas = get_heatmap_rad_mean()
         return mapFincas
 
+    # callback mapa de calor de radiación media
+    @app.callback(
+        Output('nivelCritica0', 'value'),
+        [
+            Input("radio-variedades0", "value")
+        ]
+    )
+    def actualizar_filtro_variedades(radio_variedades):
+        data_filter = Data_filter()
+        if radio_variedades == 3:
+            return data_filter.get_miniclaveles()
+        elif radio_variedades == 2:
+            return data_filter.get_claveles()
+        else:
+            return data_filter.get_miniclaveles() + data_filter.get_claveles()
+
 def actualizar_fechas(fecha_inicio, fecha_fin):
     data_filter = Data_filter()
     data_filter.set_rango_fechas(fecha_inicio, fecha_fin)

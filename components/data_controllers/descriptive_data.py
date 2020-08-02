@@ -7,19 +7,6 @@ class descriptive_data():
     eje_y = None
     def __init__(self):
         self.data_access = file_access()
-    def get_hist(self):
-        df_production = self.data_access.get_df_produccion()
-        #df_production.rename(columns=variables, inplace=True)
-        curvas = df_production.groupby(['finca','variedad','edad']).agg({'tallos_planta':['mean','median']}).reset_index()
-        #curvas[(curvas.finca == 'SC') & (curvas.variedad == 'Alicia')].plot(x='edad', y = 'tallos_planta', figsize=(15,7), title = 'SC'+' - '+'Alicia')
-        #df.groupby('finca').agg({'tallos_planta':['count']}).reset_index()
-        #print(df)
-        self.actualizar_ejes('edad','tallos_planta')
-        return curvas
-    def get_map(self):
-        df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/2014_us_cities.csv')
-        df['text'] = df['name'] + '<br>Population ' + (df['pop']/1e6).astype(str)+' million'
-        return df
     def actualizar_ejes(self, eje_x, eje_y):
         self.eje_x = eje_x
         self.eje_y = eje_y
@@ -27,7 +14,6 @@ class descriptive_data():
         return self.eje_x
     def get_eje_y(self):
         return self.eje_y
-
     def get_map2(self):
         df_production_map = self.data_access.get_df_produccion()
         df_fincas_map = self.data_access.get_df_finca()

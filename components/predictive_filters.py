@@ -6,8 +6,8 @@ import pandas as pd
 
 from components.data_access.file_access import file_access
 
-class Filter:
-    class __filter:
+class Predictive_filter:
+    class __predictive_filter:
         filtros = []
         def __init__(self):
             pass
@@ -41,16 +41,17 @@ class Filter:
             estacion = data_access.get_filtros_clima()['estacion']
 
 
-            type_flowers = ["All ", "Claveles", "Miniclaveles"]
+            type_flowers = ["All ", "Carnations", "Mini Carnations"]
             filtro = dbc.Card(
                 [
                     dbc.FormGroup(
                         [
                             html.P("Date",className="control_label"),
                             dcc.DatePickerRange(
-                            id="date_filter"+str(id),
+                            id="predictive_date_filter"+str(id),
                             start_date_placeholder_text="Start Date",
                             end_date_placeholder_text="End Date",
+                            start_date = '2019-06-01',
                             #clearable=True,
                             #with_portal=True,
                             calendar_orientation='vertical',)  
@@ -60,7 +61,7 @@ class Filter:
                         [
                             html.P("Farms:", className="control_label"),
                             #dbc.RadioItems(id="radio-fincas"+str(id),options=[{"label": "All", "value": 1},],),                
-                            dcc.Dropdown(id="categoria"+str(id),options=[{"label": col, "value": col} for col in list_fincas],multi=True,value=list_fincas,className="dcc_control",),
+                            dcc.Dropdown(id="predictive_farms_category"+str(id),options=[{"label": col, "value": col} for col in list_fincas],value='florval',className="dcc_control",),
                            
                         ]
                     ),
@@ -68,38 +69,23 @@ class Filter:
                         [
                             html.P("Colors:", className="control_label"),
                             #dbc.RadioItems(id="radio-color"+str(id),options=[{"label": "All", "value": 1},],),                
-                            dcc.Dropdown(id="categoria-color"+str(id),options=[{"label": col, "value": col} for col in list_colors_without_nan],multi=True,value=list_colors_without_nan,className="dcc_control",),
+                            dcc.Dropdown(id="predictive_color_category"+str(id),options=[{"label": col, "value": col} for col in list_colors_without_nan],value='DarkPink',className="dcc_control",),
                            
                         ]
                     ),
-                    dbc.FormGroup(
-                        [
-                            dbc.Label(u"Varieties"),
+                    dbc.Label(u"Varieties"),
                             dbc.RadioItems(
-                                id="radio-variedades"+str(id),
+                                id="radio_predictive_varieties"+str(id),
                                 options=[
-                                    {"label": "All", "value": 1},
-                                    {"label": "Carnations", "value": 2},
-                                    {"label": "Mini Carnations", "value": 3},
+                                    {"label": "Carnations", "value": 1},
+                                    {"label": "Mini Carnations", "value": 2},
                                 ],
+                                value = 1
                             ),
-                            dcc.Dropdown(
-                                id="nivelCritica"+str(id),
-                                options=[
-                                    {"label": col, "value": col}  for col in list_variedades
-                                ],
-                                multi=True,
-                                value=list_variedades,
-                                className="dcc_control",
-                            ),
-                        ]
-                    ),
                     dbc.FormGroup(
                         [
                             html.P("Weather Stations:", className="control_label"),
-                            dbc.RadioItems(id="radio-estaciones"+str(id),options=[{"label": "Day", "value": 1},{"label": "Month", "value": 2}],),                
-                            dcc.Dropdown(id="categoria-estaciones"+str(id),options=[{"label": col, "value": col} for col in estaciones],multi=False,value=estacion,className="dcc_control",),
-                           
+                            dcc.Dropdown(id="predictive_stations_category"+str(id),options=[{"label": col, "value": col} for col in estaciones],multi=False,value=estacion,className="dcc_control",)
                         ]
                     )
                 ],
@@ -108,8 +94,8 @@ class Filter:
             self.filtros.append(filtro)
     instance = None
     def __init__(self):
-        if not Filter.instance:
-            Filter.instance = Filter.__filter()
+        if not self.instance:
+            self.instance = self.__predictive_filter()
     def get_filtro(self):
         return self.instance.get_filtro()
     #def __getattribute__(self, name):

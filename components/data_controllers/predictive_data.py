@@ -33,6 +33,9 @@ class predictive_data():
 
         filter_dataset['%Cumplimiento_finca']= filter_dataset[' tallos_reales '].astype('float')/filter_dataset[' tallos_metodo_finca '].astype('float')
         filter_dataset['%Cumplimiento_red_neuronal']= filter_dataset[' tallos_reales '].astype('float')/filter_dataset[' tallos_red '].astype('float')
+
+        #filter_dataset['%Cumplimiento_finca']=filter_dataset['%Cumplimiento_finca']*100
+        #filter_dataset['%Cumplimiento_red_neuronal']=filter_dataset['%Cumplimiento_red_neuronal']*100
         
         filter_dataset = filter_dataset.filter(items=['dia','%Cumplimiento_finca','%Cumplimiento_red_neuronal'])
         filter_dataset['lim_inf']='0.95'

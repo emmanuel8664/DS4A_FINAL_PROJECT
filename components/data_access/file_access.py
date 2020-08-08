@@ -4,28 +4,29 @@ import pandas as pd
 
 class file_access(data_access):
     class __file_access:
-        #ruta_datos = r"D:\\Documentos\\Certificación DS4A\\Proyecto\\Git final\\Por unir\\2\\DS4A_FINAL_PROJECT\\data"
-        ruta_datos = r"C:\\Users\\bolemm01\\OneDrive - CSG Systems Inc\\Desktop\\DS4A\\DS4A_COPY\\DS4A_FINAL_PROJECT\\data"
-        ruta_estacion = ruta_datos + '\\estacion.csv'
-        ruta_produccion = ruta_datos + '\\produccion_color.csv'
-        ruta_finca = ruta_datos + '\\finca.csv'
-        ruta_temperatura = ruta_datos + '\\temperatura.csv'
-        ruta_radiacion = ruta_datos + '\\radiacion.csv'
-        ruta_redes = ruta_datos + '\\result_nn1.csv'
-        ruta_weather = ruta_datos + '\\weather.csv'
-        ruta_estaciones_pronostico = ruta_datos + '\\estaciones_pronostico.csv'
-        ruta_pronostico = ruta_datos + '\\resultado_final.csv'
-        ruta_colores = ruta_datos + '\\variedad_color.xlsx'
-        ruta_fechas = ruta_datos + '\\fechas.xlsx'
+        
+        ruta_datos = r"C:\\Users\\bolemm01\\OneDrive - CSG Systems Inc\\Desktop\\DS4A\DS4A_COPY\\DS4A_FINAL_PROJECT\\data\\"
+        #ruta_aws = "/home/ec2-user/DS4A/data/" 
+        ruta_estacion = ruta_datos + 'estacion.csv'
+        ruta_produccion = ruta_datos + 'produccion_color.csv'
+        ruta_finca = ruta_datos + 'finca.csv'
+        ruta_temperatura = ruta_datos + 'temperatura.csv'
+        ruta_radiacion = ruta_datos + 'radiacion.csv'
+        ruta_redes = ruta_datos + 'result_nn1.csv'
+        ruta_weather = ruta_datos + 'weather.csv'
+        ruta_estaciones_pronostico = ruta_datos + 'estaciones_pronostico.csv'
+        ruta_pronostico = ruta_datos + 'resultado_final.csv'
+        ruta_colores = ruta_datos + 'variedad_color.xlsx'
+        ruta_fechas = ruta_datos + 'fechas.xlsx'
         #ruta_clima = ruta_datos + '\\clima.csv'
         def __init__(self):
-            self.df_estacion = pd.read_csv(self.ruta_estacion, delimiter=',')
-            self.df_produccion = pd.read_csv(self.ruta_produccion, delimiter=',',low_memory=False)
-            self.df_finca = pd.read_csv(self.ruta_finca, delimiter=',',low_memory=False)
-            self.df_temperatura = pd.read_csv(self.ruta_temperatura, delimiter=',',low_memory=False)
-            self.df_radiacion = pd.read_csv(self.ruta_radiacion, delimiter=',',low_memory=False)
+            self.df_estacion = pd.read_csv(self.ruta_estacion, delimiter=',', low_memory=False)
+            self.df_produccion = pd.read_csv(self.ruta_produccion, delimiter=',' , low_memory=False)
+            self.df_finca = pd.read_csv(self.ruta_finca, delimiter=',' , low_memory=False)
+            self.df_temperatura = pd.read_csv(self.ruta_temperatura, delimiter=',', low_memory=False)
+            self.df_radiacion = pd.read_csv(self.ruta_radiacion, delimiter=',', low_memory=False)
             self.df_redes = pd.read_csv(self.ruta_redes, delimiter=',', low_memory=False)
-            self.df_estaciones_pronostico = pd.read_csv(self.ruta_estaciones_pronostico, delimiter=',',low_memory=False)
+            self.df_estaciones_pronostico = pd.read_csv(self.ruta_estaciones_pronostico, delimiter=',', low_memory=False)
             self.df_proyeccion = pd.read_csv(self.ruta_pronostico, delimiter=',', low_memory=False)
             self.df_variedad_color = pd.read_excel(self.ruta_colores)
             self.df_fechas = pd.read_excel(self.ruta_fechas)

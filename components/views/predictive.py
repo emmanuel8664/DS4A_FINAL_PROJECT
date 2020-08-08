@@ -25,8 +25,10 @@ def build_predictive():
                                 (
                                     filtro.get_filtro()
                                 ),
+
+                                html.Div("Wind force and direction"),
                                 html.Div
-                                (
+                                (   
                                     dcc.Graph(id = 'wind', figure = get_wind())
                                 )
                             ],

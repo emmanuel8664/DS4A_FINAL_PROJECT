@@ -10,7 +10,9 @@ from components.plots import descriptive_plots
 descriptive_data = descriptive_data()
 filtro = Filter()
 #ruta_datos = r"D:\\Documentos\\Certificación DS4A\\Proyecto\\Git final\\Por unir\\2\\DS4A_FINAL_PROJECT\\data"
-ruta_datos = r"C:\\Users\\bolemm01\\OneDrive - CSG Systems Inc\\Desktop\\DS4A\\DS4A_COPY\\DS4A_FINAL_PROJECT\\data"
+ruta_datos = r"C:\\Users\\bolemm01\\OneDrive - CSG Systems Inc\\Desktop\\DS4A\DS4A_COPY\\DS4A_FINAL_PROJECT\\data"
+
+
 
 def build_descriptive():
     return dbc.Card(

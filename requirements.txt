@@ -38,7 +38,7 @@ pathlib==1.0.1
 percy==2.0.2
 plotly==4.8.2
 pluggy==0.13.1
-py==1.9.0
+py==1.10.0
 pycparser==2.20
 Pygments==2.5.2
 pyOpenSSL==19.1.0

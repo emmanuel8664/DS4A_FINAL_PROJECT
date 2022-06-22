@@ -31,7 +31,7 @@ Jinja2==2.11.2
 lxml==4.5.1
 MarkupSafe==1.1.1
 more-itertools==8.4.0
-numpy==1.19.0
+numpy==1.22.0
 packaging==20.4
 pandas==1.0.5
 pathlib==1.0.1
